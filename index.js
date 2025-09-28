@@ -8,6 +8,8 @@ import morgan from 'morgan';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import postRoutes from "./routes/postRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
+import tagRoutes from "./routes/tagRoutes.js";
 
 // Initialize Express app
 const app = express();
@@ -43,6 +45,11 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 // Post routes
 app.use('/api/posts', postRoutes);
+// Category routes
+app.use('/api/categories', categoryRoutes);
+// Tag routes
+app.use('/api/tags', tagRoutes);
+
 
 // Start server with PORT from .env or default to 5000
 const PORT = process.env.PORT || 3000;
