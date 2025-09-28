@@ -7,9 +7,14 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
+import userRoutes from "./routes/userRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import tagRoutes from "./routes/tagRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
+import mediaRoutes from "./routes/mediaRoutes.js";
+import path from "path";
+
 
 // Initialize Express app
 const app = express();
@@ -43,12 +48,21 @@ app.get('/', (req, res) => {
 
 // Auth routes
 app.use('/api/auth', authRoutes);
+// User routes (Admin only)
+app.use('/api/users', userRoutes);
 // Post routes
 app.use('/api/posts', postRoutes);
 // Category routes
 app.use('/api/categories', categoryRoutes);
 // Tag routes
 app.use('/api/tags', tagRoutes);
+app.use("/api/comments", commentRoutes);
+
+
+// Serve uploaded files statically
+app.use("/uploads", express.static(path.join(path.resolve(), "uploads")));
+// Media routes
+app.use("/api/media", mediaRoutes);
 
 
 // Start server with PORT from .env or default to 5000
