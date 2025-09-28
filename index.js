@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
+import postRoutes from "./routes/postRoutes.js";
 
 // Initialize Express app
 const app = express();
@@ -40,6 +41,8 @@ app.get('/', (req, res) => {
 
 // Auth routes
 app.use('/api/auth', authRoutes);
+// Post routes
+app.use('/api/posts', postRoutes);
 
 // Start server with PORT from .env or default to 5000
 const PORT = process.env.PORT || 3000;
